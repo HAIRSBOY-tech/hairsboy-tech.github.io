@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="<h1 class='atx' id='c基础-2'>C++基础 #2</h1>
+<p>一、表达式</p>
+<p>·cout.setf(ios_base::boolalpha);用于设置cout在显示bool值时使用true或false,而不是0或1.
+·为判定表达式x=100的值，C++进行了赋值操作。">
+<meta property="og:title" content="C++ 基础2">
+<meta property="og:description" content="<h1 class='atx' id='c基础-2'>C++基础 #2</h1>
+<p>一、表达式</p>
+<p>·cout.setf(ios_base::boolalpha);用于设置cout在显示bool值时使用true或false,而不是0或1.
+·为判定表达式x=100的值，C++进行了赋值操作。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hairsboy-tech.github.io/post/C%2B%2B%20-ji-chu-2.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg">
+<title>C++ 基础2</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">C++ 基础2</h1>
+<div class="title-right">
+    <a href="https://hairsboy-tech.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/HAIRSBOY-tech/hairsboy-tech.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1 id="user-content-c基础-2">C++基础 #2</h1>
+<p>一、表达式</p>
+<p>·cout.setf(ios_base::boolalpha);用于设置cout在显示bool值时使用true或false,而不是0或1.
+·为判定表达式x=100的值，C++进行了赋值操作。当判定表达式的值的操作改变了内存中数据的值时，则该表达式有副作用(side effcet)
+·任何表达式加上分号成为语句，反过来就不对了。表达式加上分号成为表达式语句
+·返回语句、声明语句和for、while、do-while等语句都不是表达式语句，其没有值。
+如int total其不是表达式，没有值。判断语句是否为表达式看是否有值
+·可以在for循环的初始化部分声明变量。该变量会在离开for后消失。for循环的第一个语句可以是表达式语句，也可以是声明语句。</p>
+<p>▲▲·递增(++)和递减(--)运算符：每次增减1
+用法：前缀 ++变量 --变量 先修改再使用变量的值（此时已修改）
+后缀 变量-- 变量++ 先使用变量的值再修改变量</p>
+<p>警告：在编写程序时，请严格遵守标准，否则程序会出现难以预知的错误。不能在同一条语句上运用多次递增递减运算符，如x=(++n)+(n++)会在不同的系统上生成不同的结果。</p>
+<p>·副作用和顺序点
+副作用：计算表达式时对某一些东西进行了修改
+顺序点：程序执行过程的一个点，任何完整表达式后都有一个顺序点，在进入下一步前将确保对所有副作用都进行了评估。即在执行下一条语句前，赋值、递增、递减运算符执行的所有修改都必须完成。</p>
+<p>完整表达式：不是另一个更大的表达式的子表达式
+y=(4+x++)+(6+x++);
+以上语句中4+x++不是完整表达式，其后没有顺序点，所以其所有的修改无法进行保证
+则x不一定加1，所以该表达式会产生未定义行为。</p>
+<p>Note:在部分计算机教育中，有一个经典问题：i=1,则表达式n=(i++)+(++i)值为多少，这是与上面的问题相似，在上面已经明确指明此会导致不同编译器输出不同的结果。所以无论如何都不能写这样的程序。且在C++和C标准中已经明确指出此为未定义行为！！</p>
+<p>*对于用户定义的类型，若定义了递增递减运算符，则前缀格式的效率更高</p>
+<p>·递增递减与指针
+前缀格式与解除引用的优先级相同，从右向左结合；后缀格式比前缀格式优先级高，从左向右结合。<em>++pt表示先将++应用于pt后再应用</em>，++*pt意味着先取得pt指向的值，然后递增，<em>pt++先应用++再应用</em>。</p>
+<p>复合语句（代码块）由一对花括号和它包含的语句组成，被视作一条语句。
+在代码块中定义的变量只在其中有效。若外部定义了同名变量，则先隐藏，在代码块执行完毕后代码块中的变量消失，外部的变量重新出现。</p>
+<p>▲·逗号运算符：表达式的值为右侧（第二部分）的值。</p>
+<p>·bool值提升为int:只有0(false)和1(true)两种情况</p>
+<p>二、C风格字符串的比较</p>
+<p>注意：用引号引起的字符串常量也是其地址，word==”mate”比较的是它们地址是否一致</p>
+<p>▲▲▲▲▲cstring文件中的strcmp()函数：接受两个char*
+如果两个字符串相同，则返回0
+以下为对其的解释的2个版本：
+①如果第一个字符串按字母排序排在第二个字符串后面，strcmp()返回正数值。（也说按系统排列顺序）在ASCII码中，大写编码都比小写小，大写字母排在前面。
+②strcmp()函数是根据ACSII码的值来依次比较 str1 和 str2 的每一个字符直到出现不到的字符，或者到达字符串末尾；strcmp()函数首先将s1字符串的第一个字符值减去s2第一个字符，若差值为零则继续比较下去；若差值不为零，则返回差值。
+如：”Zoo”比”aviary”排在前面，”Physics”与”physics”不一样</p>
+<p>检测相等或排列顺序:                以下表达式为true的条件：
+①str1与str2相等 strcmp(str1,str2)==0
+②str1与str2不相等 strcmp(str1,str2)!=0
+strcmp(str1,str2)
+③str1在str2的前面（此时str1&lt;str2） strcmp(str1,str2)&lt;0<br>//str1中的字符比str2的字符数值小
+④str1在str2的后面（此时str1&gt;str2） strcmp(str1,str2)&gt;0<br>//str1中的字符比str2的字符数值小</p>
+<p>三、计时器(头文件ctime或time.h)</p>
+<p>clock()函数返回程序开始执行后所用的系统时间,返回clock_t类型(是一个类型别名)
+CLOCKS_PER_SEC常量是每秒钟包含的系统时间单位数，将系统时间除以该值得到秒数。
+即 系统时间/每秒钟系统时间单位数(CLOCKS_PER_SEC)=秒数
+所以 秒数*CLOCKS_PER_SEC=系统时间，为以上的实现</p>
+<p>类型别名：关键字typedef:格式: typedef 类型名 类型的别名;
+此时可以用声明的别名来替代原来的类型名使用。如 typedef char* B_pointer;</p>
+<p>一个计时器案列(来自C++ Primer Plus)</p>
+<pre class="notranslate"><code class="notranslate">#include &lt;iostream&gt;
+#include &lt;ctime&gt; // describes clock() function, clock_t type
+int main()
+{
+    using namespace std;
+    cout &lt;&lt; "Enter the delay time, in seconds: ";
+    float secs;
+    cin &gt;&gt; secs;
+    clock_t delay = secs * CLOCKS_PER_SEC;  // convert to clock ticks
+    cout &lt;&lt; "starting\a\n";
+    clock_t start = clock();
+    while (clock() - start &lt; delay )        // wait until time elapses
+        ;                                   // note the semicolon
+    cout &lt;&lt; "done \a\n";
+    // cin.get();
+    // cin.get();
+    return 0; 
+}</code></pre>
+<p>四、基于范围的for循环(C++11)
+示例：
+double prices[5] = {4.99, 10.99, 6.87, 7.99, 8.49}; 
+for (double x : prices) 
+cout &lt;&lt; x &lt;&lt; std::endl;
+该循环显示数组中的每一个值（从prices[0]到prices[4]）
+能够结合使用初始化列表
+for (int x : {3, 5, 2, 8, 6}) 
+cout &lt;&lt; x &lt;&lt; " ";
+cout &lt;&lt; ‘\n’;</p>
+<p>五、循环进行字符输入</p>
+<p>1.使用原始的cin
+(1)传统停止输入方法：使用哨兵字符，将其作为停止标记.
+(2)cin在读取char值时忽略空格和换行符。输入的空格不能回显
+(3)cin的输入被缓冲，按下回车键后才会发送内容。</p>
+<pre class="notranslate"><code class="notranslate">#include&lt;iostream&gt;
+using namespace std;
+int main()
+{
+    char ch=0;
+    int total=0;
+    while(ch!='$')
+    {
+        cin&gt;&gt;ch;
+        total++;
+        cout&lt;&lt;ch;
+    }
+    return 0;
+}</code></pre>
+<p><code class="notranslate">&lt;stdin&gt;</code>         What can I do for you?$</p>
+<p><code class="notranslate">&lt;stdout&gt;</code>         WhatcanIdoforyou?$</p>
+<p>2.补救
+（1）cin.get(ch);读取输入中的下一个字符，包括空格、制表符、换行符。其返回istream&amp;类型的cin(是cin对象的引用，可以继续调用cin的方法)。
+注：cin所属的istream类包含了成员get(ch)，其子类都有这个方法。
+（2）C++中可以有多个同名函数，是函数重载
+（3）文件尾条件
+①制造文件尾：Ctrl+Z (^Z)
+②C++在检测到EOF(END OF FILE,即文件尾)，cin将两位(eofbit和failbit)设为1.
+cin.eof() 检测到eofbit被设为1，cin.eof()返回true,否则返回false.
+cin.fail() 如果eofbit或failbit设为1，则fail()成员返回true
+两个函数报告最近读取的结果
+cin.clear() 重置输入
+③istream对象在需要bool值的地方可以转为bool值（调用转换函数）。若最后一次读取成功，返回true,失败返回false。其比两个成员函数更通用。
+④不接受任何参数的cin.get()成员函数返回输入中的下一个字符。该函数到达EOF时返回符号常量EOF，其值被定义为-1.
+⑤cout.put(ch)显示一个字符</p>
+<p>六、字符函数库 cctype</p>
+<p><a target="_blank" rel="noopener noreferrer" href=""><img alt="" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href=""><img alt="" style="max-width: 100%;"></a></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://hairsboy-tech.github.io">Hairsboy's blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","HAIRSBOY-tech/hairsboy-tech.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
