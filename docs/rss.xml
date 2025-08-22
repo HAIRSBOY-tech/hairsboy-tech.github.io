@@ -1,5 +1,48 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Hairsboy's blog</title><link>https://hairsboy-tech.github.io</link><description>线性联邦博客:试运行</description><copyright>Hairsboy's blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg</url><title>avatar</title><link>https://hairsboy-tech.github.io</link></image><lastBuildDate>Thu, 21 Aug 2025 16:57:47 +0000</lastBuildDate><managingEditor>Hairsboy's blog</managingEditor><ttl>60</ttl><webMaster>Hairsboy's blog</webMaster><item><title>C++ 基础2</title><link>https://hairsboy-tech.github.io/post/C%2B%2B%20-ji-chu-2.html</link><description>&lt;h1 class='atx' id='c基础-2'&gt;C++基础 #2&lt;/h1&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Hairsboy's blog</title><link>https://hairsboy-tech.github.io</link><description>线性联邦博客:试运行</description><copyright>Hairsboy's blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg</url><title>avatar</title><link>https://hairsboy-tech.github.io</link></image><lastBuildDate>Fri, 22 Aug 2025 16:59:40 +0000</lastBuildDate><managingEditor>Hairsboy's blog</managingEditor><ttl>60</ttl><webMaster>Hairsboy's blog</webMaster><item><title>C++ 标准库与STL PART 1</title><link>https://hairsboy-tech.github.io/post/C%2B%2B%20-biao-zhun-ku-yu-STL%20PART%201.html</link><description>&lt;h1 class='atx' id='c-标准库与stl库--------part-1'&gt;C++ 标准库与STL库&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;PART 1&lt;/h1&gt;
+&lt;h2 class='atx' id='string类'&gt;&lt;code&gt;string&lt;/code&gt;类&lt;/h2&gt;
+&lt;p&gt;·头文件:&lt;code&gt;string&lt;/code&gt;
+·名称空间:&lt;code&gt;std&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;(1)特性:
+1.&lt;code&gt;string&lt;/code&gt;是模板具体化&lt;code&gt;basic_string&amp;lt;char&amp;gt;&lt;/code&gt;的一个typedef.
+2.&lt;code&gt;size_type&lt;/code&gt;是一个依赖实现的整型，位于头文件&lt;code&gt;string&lt;/code&gt;
+3.&lt;code&gt;string::npos&lt;/code&gt;为字符串的最大长度，通常为&lt;code&gt;unsigned int&lt;/code&gt;的最大值.&lt;/p&gt;
+&lt;p&gt;(2)基础方法&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;方法&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;size()&lt;/code&gt;、&lt;code&gt;length()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;返回字符串的字符个数&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;operator[]()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;下标访问法&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;operator+()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;拼接字符串&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;operator=()&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;赋值&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;&lt;/table&gt;
+&lt;p&gt;(3)构造函数&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;构造函数&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;string(const char *s);&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;将string对象初始化为C风格字符串。</description><guid isPermaLink="true">https://hairsboy-tech.github.io/post/C%2B%2B%20-biao-zhun-ku-yu-STL%20PART%201.html</guid><pubDate>Fri, 22 Aug 2025 16:59:13 +0000</pubDate></item><item><title>C++ 基础2</title><link>https://hairsboy-tech.github.io/post/C%2B%2B%20-ji-chu-2.html</link><description>&lt;h1 class='atx' id='c基础-2'&gt;C++基础 #2&lt;/h1&gt;
 &lt;p&gt;一、表达式&lt;/p&gt;
 &lt;p&gt;·cout.setf(ios_base::boolalpha);用于设置cout在显示bool值时使用true或false,而不是0或1.
 ·为判定表达式x=100的值，C++进行了赋值操作。</description><guid isPermaLink="true">https://hairsboy-tech.github.io/post/C%2B%2B%20-ji-chu-2.html</guid><pubDate>Thu, 21 Aug 2025 15:01:28 +0000</pubDate></item><item><title>C++ 基础</title><link>https://hairsboy-tech.github.io/post/C%2B%2B%20-ji-chu.html</link><description>&lt;h1 class='atx' id='基本内容'&gt;基本内容&lt;/h1&gt;

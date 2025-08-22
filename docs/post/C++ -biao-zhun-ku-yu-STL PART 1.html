@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="<h1 class='atx' id='c-标准库与stl库--------part-1'>C++ 标准库与STL库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PART 1</h1>
+<h2 class='atx' id='string类'><code>string</code>类</h2>
+<p>·头文件:<code>string</code>
+·名称空间:<code>std</code></p>
+<p>(1)特性:
+1.<code>string</code>是模板具体化<code>basic_string&lt;char&gt;</code>的一个typedef.
+2.<code>size_type</code>是一个依赖实现的整型，位于头文件<code>string</code>
+3.<code>string::npos</code>为字符串的最大长度，通常为<code>unsigned int</code>的最大值.</p>
+<p>(2)基础方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>size()</code>、<code>length()</code></td>
+<td>返回字符串的字符个数</td>
+</tr>
+<tr>
+<td><code>operator[]()</code></td>
+<td>下标访问法</td>
+</tr>
+<tr>
+<td><code>operator+()</code></td>
+<td>拼接字符串</td>
+</tr>
+<tr>
+<td><code>operator=()</code></td>
+<td>赋值</td>
+</tr>
+</tbody></table>
+<p>(3)构造函数</p>
+<table>
+<thead>
+<tr>
+<th>构造函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>string(const char *s);</code></td>
+<td>将string对象初始化为C风格字符串。">
+<meta property="og:title" content="C++ 标准库与STL PART 1">
+<meta property="og:description" content="<h1 class='atx' id='c-标准库与stl库--------part-1'>C++ 标准库与STL库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PART 1</h1>
+<h2 class='atx' id='string类'><code>string</code>类</h2>
+<p>·头文件:<code>string</code>
+·名称空间:<code>std</code></p>
+<p>(1)特性:
+1.<code>string</code>是模板具体化<code>basic_string&lt;char&gt;</code>的一个typedef.
+2.<code>size_type</code>是一个依赖实现的整型，位于头文件<code>string</code>
+3.<code>string::npos</code>为字符串的最大长度，通常为<code>unsigned int</code>的最大值.</p>
+<p>(2)基础方法</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>size()</code>、<code>length()</code></td>
+<td>返回字符串的字符个数</td>
+</tr>
+<tr>
+<td><code>operator[]()</code></td>
+<td>下标访问法</td>
+</tr>
+<tr>
+<td><code>operator+()</code></td>
+<td>拼接字符串</td>
+</tr>
+<tr>
+<td><code>operator=()</code></td>
+<td>赋值</td>
+</tr>
+</tbody></table>
+<p>(3)构造函数</p>
+<table>
+<thead>
+<tr>
+<th>构造函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>string(const char *s);</code></td>
+<td>将string对象初始化为C风格字符串。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hairsboy-tech.github.io/post/C%2B%2B%20-biao-zhun-ku-yu-STL%20PART%201.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg">
+<title>C++ 标准库与STL PART 1</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">C++ 标准库与STL PART 1</h1>
+<div class="title-right">
+    <a href="https://hairsboy-tech.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/HAIRSBOY-tech/hairsboy-tech.github.io/issues/9" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1 id="user-content-c-标准库与stl库--------part-1">C++ 标准库与STL库        PART 1</h1>
+<h2 id="user-content-string类"><code class="notranslate">string</code>类</h2>
+<p>·头文件:<code class="notranslate">string</code>
+·名称空间:<code class="notranslate">std</code></p>
+<p>(1)特性:
+1.<code class="notranslate">string</code>是模板具体化<code class="notranslate">basic_string&lt;char&gt;</code>的一个typedef.
+2.<code class="notranslate">size_type</code>是一个依赖实现的整型，位于头文件<code class="notranslate">string</code>
+3.<code class="notranslate">string::npos</code>为字符串的最大长度，通常为<code class="notranslate">unsigned int</code>的最大值.</p>
+<p>(2)基础方法</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">size()</code>、<code class="notranslate">length()</code></td>
+<td>返回字符串的字符个数</td>
+</tr>
+<tr>
+<td><code class="notranslate">operator[]()</code></td>
+<td>下标访问法</td>
+</tr>
+<tr>
+<td><code class="notranslate">operator+()</code></td>
+<td>拼接字符串</td>
+</tr>
+<tr>
+<td><code class="notranslate">operator=()</code></td>
+<td>赋值</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>(3)构造函数</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>构造函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">string(const char *s);</code></td>
+<td>将string对象初始化为C风格字符串。用法：string(要初始化为的C风格字符串);</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(size_type n,char c);</code></td>
+<td>创建一个包含n个c字符的字符串。用法string(需要的字符数，填充的字符);</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(const string &amp;str);</code></td>
+<td>复制构造函数</td>
+</tr>
+<tr>
+<td><code class="notranslate">string();</code></td>
+<td>默认构造函数</td>
+</tr>
+<tr>
+<td><code class="notranslate">template&lt;class Iter&gt;string(Iter begin,Iter end);</code></td>
+<td>初始化为区间[begin,end)之间的字符,其包含begin不包含end.begin和end可以看做是指针(迭代器)。用法：string(开始位置，结束位置)；</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(const string &amp;str,size_type pos,size_type n=npos);</code></td>
+<td>初始化为对象str中从位置pos开始到结尾的字符，或从位置pos开始的n个字符.用法：string(被操作string对象，开始位置，抽取字符数=到达结尾)；</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(string &amp;&amp;str) noexcept;</code></td>
+<td>[C++11]初始化为str,并可能修改（移动构造函数）</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(const char*s,size_type n);</code></td>
+<td>初始化为s的前n个字符，即使超过'\0'用法：string(要操作的C风格字符串,需要的长度)</td>
+</tr>
+<tr>
+<td><code class="notranslate">string(initializer_list&lt;char&gt; il);</code></td>
+<td>[C++11]初始化为花括号初始化列表里的字符.Initializer_list是初始化列表，如{1,2,3,4,5};</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>(4)string版<code class="notranslate">getline()</code>用法:<code class="notranslate">getline(输入流对象，string对象)；</code>
+该函数自动调整string大小
+当读取的字符数达到最大值,设置failbit</p>
+<p>(5)string的逻辑运算符均被重载。用于进行字典序比较</p>
+<p>(6)字符搜素:<code class="notranslate">find()</code>方法：
+    (6.1)<code class="notranslate">size_type find(const string &amp;str,size_type pos=0) const;</code>
+    (6.2)<code class="notranslate">size_type find(const char *s,size_type pos=0) const;</code>
+    (6.3)<code class="notranslate">size_type find(const char ch,size_type pos=0) const;</code>
+从字符串的pos位置查找子字符串str(或s)或字符ch的位置。
+若找到，返回其首地址，否则返回 string::npos。
+(6.1)(6.2)(6.3)用法:<code class="notranslate">find(string字符串或C风格字符串或字符，开始位置=0);</code>
+    (6.4)<code class="notranslate">size_type find(const char *s,size_type pos,size_type n) ;</code>从字符串的pos位置开始，查找s的前n个字符组成的字符串，返回方式同(1)(2).
+用法:<code class="notranslate">find(待取的C风格字符串,查找的开始位置,取的字符数);</code></p>
+<p>(7)其他搜索:与find()的重载特征都相同
+    (7.1)<code class="notranslate">rfind()</code>查找子字符(串)最后一次出现的位置.
+    (7.2)<code class="notranslate">find_first_of()</code>查找参数中任何一个字符首次出现的位置
+    (7.3)<code class="notranslate">find_last_of()</code> 与（7.2）相仿，但查找最后一个
+    (7.4)<code class="notranslate">find_first_not_of()</code>查找第一个不包含在参数中的字符
+    (7.5)<code class="notranslate">find_last_not_of()</code>与（7.4）相仿，但查找最后一个
+(8)其他方法:
+<code class="notranslate">capacity() </code>返回当前分配给字符串的内存块的大小
+<code class="notranslate">reserve(长度)</code> 请求内存块的最小长度
+<code class="notranslate">c_str()</code>返回对应的C风格字符串</p>
+<h3 id="user-content-注"><strong>注</strong>:</h3>
+<p>模板basic_string有4个具体化，每个具体化都有一个typedef名称:</p>
+<pre class="notranslate"><code class="notranslate">typedef basic_string&lt;char&gt; string;
+typedef basic_string&lt;wchar_t&gt; wstring;
+typedef basic_string&lt;char16_t&gt; u16string;//C++11
+typedef basic_string&lt;char32_t&gt; u32string;//C++11</code></pre>
+<p>其原型如下：</p>
+<pre class="notranslate"><code class="notranslate">template&lt;class charT,class traits=char_traits&lt;charT&gt;,
+class Allocator=allocator&lt;charT&gt; &gt; basic_string;</code></pre>
+<p><code class="notranslate">charT</code>是字符类型，<code class="notranslate">traits</code>是其特征，<code class="notranslate">Allocator</code>管理内存分配(使用 new和delete)</p>
+<h3 id="user-content-stl">STL</h3>
+<p>一、基本概念</p>
+<p>1. STL包括了一组表示<strong>容器</strong>(类似数组)、<strong>迭代器</strong>(能够用来遍历容器的对象，与能够遍历数组的指针相似，<strong>是一个广义指针</strong>)、<strong>函数对象</strong>(类似于函数的对象)和<strong>算法</strong>(完成特定任务的过程)的模板。</p>
+<p>2. <strong>分配器</strong>：各种STL容器模板都接受一个可选的模板参数，该参数指定了使用哪一个分配器对象来管理内存。(使用的是new和delete)</p>
+<p>3. 所有的STL容器提供的基本方法：</p>
+<p><code class="notranslate">.size()</code>容器中的元素个数</p>
+<p><code class="notranslate">.swap()</code>交换两个容器的内容</p>
+<p><code class="notranslate">.begin()</code>返回一个指向容器第一个元素的迭代器</p>
+<p><code class="notranslate">.end()</code>返回一个表示超过容器尾的指针</p>
+<p>4. 每一个容器都定义了一个迭代器，为一个名为<code class="notranslate">iterator</code>的typedef，作用域为类。声明一个迭代器：</p>
+<p><code class="notranslate">类名::iterator 迭代器名;</code></p>
+<p>其可以：解除引用<code class="notranslate"> operator*()</code>、自增<code class="notranslate">operator++()</code></p>
+<p>E.g. <code class="notranslate">vector&lt;double&gt;::iterator</code></p>
+<p>5. <strong>超过结尾</strong>(past_the_end):指向容器最后一个元素后面的元素的迭代器</p>
+<p>6. 某些STL容器特有的方法:</p>
+<p>(1) <code class="notranslate">push_back(追加的元素)</code>将元素添加到末尾，并增加长度</p>
+<p>(2) <code class="notranslate">erase(开始迭代器，结束迭代器)</code>删除制定区间的元素，接受两个迭代器(包含<code class="notranslate">operator+()</code>方法),包括开始不包括结束。</p>
+<p>(3) <code class="notranslate">insert(新元素的插入位置迭代器，被插入区间开始迭代器，被插入区间结束迭代器);</code>用于插入元素，接受3个迭代器，包括开始不包括结束。</p>
+<p>e.g.<code class="notranslate">new_v.insert(new_v.begin(),old_v.begin(),old_v.end())；</code></p>
+<p>将矢量old_v的内容插入到矢量new_v的第一个元素前面</p>
+<p>二、基本算法(头文件 algorithm)</p>
+<p><code class="notranslate">for_each(开始迭代器，结束迭代器，要应用的函数指针);</code>前两个是一个容器的区间(不包括结束)，最后是函数指针，会被应用于区间的各个元素，被指向的函数不能修改元素值。
+<code class="notranslate">random_shuffle(开始迭代器，结束迭代器);</code>随机排列区间的元素，要求容器随机访问。
+<code class="notranslate">sort(开始迭代器，结束迭代器)</code>
+<code class="notranslate">sort(开始迭代器，结束迭代器,自定义排序函数)</code>
+只接受区间时，使用&lt;运算符，对区间升序排序。(要有对应的<code class="notranslate">operator&lt;()</code>函数)
+接受区间和函数指针时，函数返回值为false表示排序不正确.</p>
+<p>三、<strong>迭代器</strong>:</p>
+<p>1. C++将<code class="notranslate">operator++()</code>作为前缀版本，将<code class="notranslate">operator++(int)</code>作为后缀版本。其中的参数根本不会使用，因此无需指定名称</p>
+<p>2. 迭代器都能进行解除引用和比较</p>
+<p>3.迭代器的类型：</p>
+<p>(1) <strong>输入迭代器</strong>：来自容器的信息被称为<strong>输入</strong>，可被程序用来<strong>读取</strong>容器中的<strong>信息</strong>，但<strong>不一定</strong>让程序<strong>修改</strong>，该种算法<strong>不修改值</strong>。(只读不写)</p>
+<p>基于输入迭代器的任何算法都是<strong>单通行</strong>的，可以<strong>递增</strong>，不可倒退。</p>
+<p>(2) <strong>输出迭代器</strong>：将信息从程序传输给容器的迭代器。<strong>只能解除引用修改容器值</strong>，不能读取。(只写不读)输出迭代器是单通行的。</p>
+<p>(3) <strong>正向迭代器</strong>：与输入迭代器和输出迭代器相似，只用<code class="notranslate">++</code><strong>运算符遍历容器。每次沿容器向前移动一个元素。总是按照相同的顺序遍历一系列的值。仍可以对以前的值解除引用</strong>，能够<strong>读写数据</strong>，也可只读数据。</p>
+<p>(4) <strong>双向迭代器</strong>：包含了正向迭代器的特性，支持<code class="notranslate">--</code>运算符。</p>
+<p>(5) <strong>随机访问迭代器</strong>:能够直接跳转到任意元素（随机访问），包含了双向迭代器的特性，支持随机访问。</p>
+<p>随机访问迭代器操作：a、b为迭代器值，n为整数，r为随机访问迭代器的变量或引用。这些表达式只有在容器区间内（包括超尾）才合法。其操作如下：</p>
+<p><code class="notranslate">a+n 或 n+a:指向a所指向的元素后的第n个元素;</code></p>
+<p><code class="notranslate">a-n:指向a所指向的元素前的第n个元素;</code></p>
+<p><code class="notranslate">r+=n、r-=n：复合运算符；</code></p>
+<p><code class="notranslate">a[n]同*(a+n);b-a减法;a&lt;b,a&gt;b,a&lt;=b,a&gt;=b用来比较地址。</code></p>
+<p>(6)每个迭代器的性能</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>Iterator Capability</th>
+<th>Input</th>
+<th>Output</th>
+<th>Forward</th>
+<th>Bidirectional</th>
+<th>Random Access</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fixed and repeatable order</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>++i                     i++</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>--i                       i--</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>i[n]</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>i + n</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>i - n</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>i+=n</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+<tr>
+<td>i-=n</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+<td>Y</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>4.<strong>概念</strong>、<strong>改进</strong>与<strong>模型</strong>：</p>
+<p>概念是一系列的要求；改进是概念上的继承（因为其无法使用C++的类继承来描述，如将指针用作迭代器）；模型是概念的具体实现。</p>
+<p>以下算法使用头文件algorithm</p>
+<p>(1) STL <code class="notranslate">std::sort()</code>函数：接受指向容器（数组）的第一个元素的迭代器（指针）和指向超尾的迭代器（指针）,<strong>用于排序</strong>。</p>
+<p>用法：<code class="notranslate">sort(首迭代器，超尾迭代器);</code></p>
+<p>(2) STL <code class="notranslate">std::copy()</code>函数：从一容器<strong>复制元素</strong>到另一迭代器，前两个迭代器指出要复制的元素范围（输入迭代器），最后一个迭代器（输出迭代器）指出要将第一个元素复制到的位置（目的地）。</p>
+<p>注意：目标容器要足够大。复制不同于插入，其会覆盖原有的数据。</p>
+<p>用法<code class="notranslate">copy(开始，结束，目的地)；</code></p>
+<p>四、迭代器使用 <strong>头文件：iterator</strong></p>
+<p>(1) 将信息复制到输入输出和其他迭代器</p>
+<p><strong>适配器</strong>:用于将其他接口转为STL接口</p>
+<p>①表示输出流的迭代器：<code class="notranslate">ostream_iterator</code>模板，其是一个适配器，可将其他的接口转换为STL接口用法：</p>
+<p><code class="notranslate">ostream_iterator&lt;被发送给输出流的数据类型，输出流所使用的字符类型&gt;</code></p>
+<p><code class="notranslate">迭代器名(输出流名称，每个数据的分隔符(字符串));</code></p>
+<p>如：<code class="notranslate">ostream_iterator&lt;int,char&gt; cout_iter(cout,” ”);</code></p>
+<p>使用<code class="notranslate">*cout_iterator++ =15</code>即可复制，等价于<code class="notranslate">cout&lt;&lt;15&lt;&lt;” ”;</code></p>
+<p>可复制到输出流内使用数据，可以创建无名迭代器。</p>
+<p>如：<code class="notranslate">copy(dict.begin(),dict.end(),ostream_iterator&lt;int,char&gt;(cout,””));</code></p>
+<p><code class="notranslate">//ostream_iterator&lt;int,char&gt;(cout,””))也可以换为一个具体的名称。</code></p>
+<p>②<code class="notranslate">istream_iterator</code>使<code class="notranslate">istream</code>输入可用作迭代器接口，拥有两个模板参数，声明方法：<code class="notranslate">istream_iterator&lt;读取的数据类型，输入流使用的字符类型&gt;迭代器名(输入流名)</code>，使用cin代表cin管理输入流，省略构造函数表示输入失败。可将其运用到copy()算法中，直到EOF、不匹配或其他问题为止。样例：</p>
+<p><code class="notranslate">copy(istream_iterator&lt;int,char&gt;(cin),istream_iterator&lt;int,char&gt;(),dict.begin);</code></p>
+<p>③<code class="notranslate">reverse_iterator</code>(反向迭代器):对反向迭代器递增操作将导致其被递减。</p>
+<p>vector类有rbegin()和rend()的成员函数，rbegin()返回指向超尾元素的反向迭代器(<code class="notranslate">vector&lt;T&gt;::reverse_iterator</code>)，rend()返回第一个元素的反向迭代器。</p>
+<p>若要反着打印容器内容，可以进行如下操作:</p>
+<p><code class="notranslate">copy(dice.rbegin(),dice.rend(),ostream_iterator&lt;int,char&gt;(cout,””));</code></p>
+<p>反向指针通过<strong>先递减再解除引用</strong>解决问题。(即<em>rp将在</em>rp的当前值之前对迭代器解除引用。)</p>
+<p>④插入迭代器:添加新的元素，不会覆盖已有的数据，并会自动分配内存来容纳新的内容</p>
+<p><code class="notranslate">back_insert_iterator</code>将容器插入到容器尾部</p>
+<p><code class="notranslate">front_insert_iterator</code>:插入到容器的前端</p>
+<p><code class="notranslate">insert_iterator</code>:将元素插入到其构造函数指定的位置前面</p>
+<p>可以直接使用<code class="notranslate">copy()</code>函数。</p>
+<p>限制如下：<code class="notranslate">back_insert_iterator</code>需要允许在尾部快速插入的容器(插入操作的时间复杂度为常数,如vector)，<code class="notranslate">front_insert_iterator</code>需要允许在起始位置做时间固定插入的容器类型(如queue)，<code class="notranslate">insert_iterator</code>没有限制。</p>
+<p>这些迭代器将容器类型作为模板参数。<code class="notranslate">back_insert_iterator</code>的构造函数假设传递给它的类型有<code class="notranslate">push_back()</code>方法。声明<code class="notranslate">front_insert_iterator</code>大同小异。<code class="notranslate">insert_iterator</code>需要指出位置。他们的声明格式为：</p>
+<p><code class="notranslate">back_insert_iterator  &lt;容器类型&gt; 迭代器名(容器名);</code></p>
+<p><code class="notranslate">front_insert_iterator &lt;容器类型&gt; 迭代器名(容器名);</code></p>
+<p><code class="notranslate">insert_iterator&lt;容器类型&gt; 迭代器名(容器名,插入位置);</code></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://hairsboy-tech.github.io">Hairsboy's blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","HAIRSBOY-tech/hairsboy-tech.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
