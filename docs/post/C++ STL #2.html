@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="<h1 class='atx' id='c-stl-2'>C++ STL 2</h1>
+<p>五、容器</p>
+<p>早期的11个容器类型：<code>deque</code>、<code>list</code>、<code>queue</code>、<code>stack</code>、<code>vector</code>、<code>map</code>、<code>multimap</code>、<code>set</code>、<code>multiset</code>和<code>bitset</code>。">
+<meta property="og:title" content="C++ STL #2">
+<meta property="og:description" content="<h1 class='atx' id='c-stl-2'>C++ STL 2</h1>
+<p>五、容器</p>
+<p>早期的11个容器类型：<code>deque</code>、<code>list</code>、<code>queue</code>、<code>stack</code>、<code>vector</code>、<code>map</code>、<code>multimap</code>、<code>set</code>、<code>multiset</code>和<code>bitset</code>。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://hairsboy-tech.github.io/post/C%2B%2B%20STL%20%232.html">
+<meta property="og:image" content="https://raw.githubusercontent.com/HAIRSBOY-tech/hairsboy-tech.github.io/refs/heads/main/avatar.jpg">
+<title>C++ STL #2</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">C++ STL #2</h1>
+<div class="title-right">
+    <a href="https://hairsboy-tech.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/HAIRSBOY-tech/hairsboy-tech.github.io/issues/10" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1 id="user-content-c-stl-2">C++ STL 2</h1>
+<p>五、容器</p>
+<p>早期的11个容器类型：<code class="notranslate">deque</code>、<code class="notranslate">list</code>、<code class="notranslate">queue</code>、<code class="notranslate">stack</code>、<code class="notranslate">vector</code>、<code class="notranslate">map</code>、<code class="notranslate">multimap</code>、<code class="notranslate">set</code>、<code class="notranslate">multiset</code>和<code class="notranslate">bitset</code>。C++11新增容器：<code class="notranslate">forward_list</code>、<code class="notranslate">unordered_map</code>、<code class="notranslate">unordered_mulitmap</code>、<code class="notranslate">unordered_set</code>和<code class="notranslate">unordered_mulitset</code>。</p>
+<p>1.容器的基本特征：</p>
+<p><code class="notranslate">X</code>表示容器；<code class="notranslate">T</code>表示存储在容器中的对象类型;<code class="notranslate">a</code>、<code class="notranslate">b</code>表示类型为<code class="notranslate">X</code>的值；<code class="notranslate">r</code>表示类型为<code class="notranslate">X&amp;</code>的值；<code class="notranslate">u</code>表示类型为<code class="notranslate">X</code>的标识符。</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>表达式</th>
+<th>返回类型</th>
+<th>说明</th>
+<th>（时间）复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">X::iterator</code></td>
+<td>指向<code class="notranslate">T</code>的迭代器</td>
+<td>正向迭代器</td>
+<td>编译时间</td>
+</tr>
+<tr>
+<td><code class="notranslate">X::value_type</code></td>
+<td><code class="notranslate">T</code></td>
+<td><code class="notranslate">T</code>的类型</td>
+<td>编译时间</td>
+</tr>
+<tr>
+<td><code class="notranslate">X u;</code></td>
+<td></td>
+<td>创建容器u(空)</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">X ();</code></td>
+<td></td>
+<td>创建匿名空容器</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">X u(a);X u=a;</code></td>
+<td></td>
+<td>调用复制构造函数后<code class="notranslate">u==a</code>.</td>
+<td>线性O(n)</td>
+</tr>
+<tr>
+<td><code class="notranslate">r=a</code></td>
+<td>X&amp;</td>
+<td>赋值运算符</td>
+<td>线性O(n)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.begin()</code></td>
+<td>迭代器</td>
+<td>指向第一个元素的迭代器</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">(&amp;a)-&gt;~X()</code></td>
+<td>void</td>
+<td>析构函数</td>
+<td>线性O(n)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.end()</code></td>
+<td>迭代器</td>
+<td>返回指向超尾元素的迭代器</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.size()</code></td>
+<td>无符号整型</td>
+<td>返回元素个数</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.swap(b)</code></td>
+<td>void</td>
+<td>交换a、b的内容</td>
+<td>固定O(1)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a==b</code>    <code class="notranslate">a!=b</code>与<code class="notranslate">a==b</code>相反</td>
+<td>可转为bool</td>
+<td>如果a、b长度相等，相应的元素都相等，返回真。</td>
+<td>线性O(n)</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>复杂度描绘了执行操作所需要的时间。从快到慢依次为：编译时间、固定时间、线性时间。</p>
+<p>2.C++11 新增的容器要求：rv表示类型为X的非常量右值</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th><code class="notranslate">X u(rv);X u=rv;</code></th>
+<th></th>
+<th>调用移动构造函数</th>
+<th>线性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">a=rv;</code></td>
+<td><code class="notranslate">X&amp;</code></td>
+<td>调用移动赋值运算符</td>
+<td>线性</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.cbegin()</code></td>
+<td><code class="notranslate">const_iterator</code></td>
+<td>返回指向第一个元素的const迭代器</td>
+<td>固定</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.cend()</code></td>
+<td><code class="notranslate">const_iterator</code></td>
+<td>返回指向超尾元素的const迭代器</td>
+<td>固定</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>移动操作可能修改源对象，还可能转让所有权，而不做任何复制。</p>
+<p>1. <strong>序列容器</strong>：(7种STL容器：<code class="notranslate">deque</code>双端队列、<code class="notranslate">forward_list</code>链表、<code class="notranslate">queue</code>队列、<code class="notranslate">priority_queue</code>优先队列(二叉堆)、<code class="notranslate">stack</code>(栈)和<code class="notranslate">vector</code>(矢量))</p>
+<p>(1) <code class="notranslate">queue</code>队列能够能够在队尾添加元素，在队首删除元素；<code class="notranslate">deque</code>表示双端队列允许在两端添加或删除元素（<code class="notranslate">array</code>也被归为序列容器）。</p>
+<p>(2) 特征：按线性顺序排列，即存在第一个元素，最后一个元素，除了该两个元素处其他的元素前后都分别有一个元素。</p>
+<p>(3)序列的要求：t表示类型为T的值，n表示整数，p、q、i、j表示迭代器（T可做存储在容器中值的类型）</p>
+<p>①基本操作[注：区间[x,y）的范围包括x(起始)不包括y(结束)]</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>表达式</th>
+<th>返回类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">X a(n,t);X(n,t);</code></td>
+<td></td>
+<td>声明一个由n个t值组成的序列,名称为a或匿名。格式：X(需要的数量，需要的值)</td>
+</tr>
+<tr>
+<td><code class="notranslate">X a(i,j);X (i,j);</code></td>
+<td></td>
+<td>声明一个名为a(或匿名)的容器并初始化为区间[i,j)的内容。格式：X(开始，结束/[区间])</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.insert(p,t);</code></td>
+<td>迭代器</td>
+<td>将t插入到p的前面格式：insert(位置，待插入值)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.insert(p,n,t);</code></td>
+<td>void</td>
+<td>将n个t插入到p的前面格式：insert(位置，需要的数量，待插入值)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.insert(p,i,j);</code></td>
+<td>void</td>
+<td>将区间[i,j)中的元素插到p前格式：insert(要插入的位置，[区间]/开始位置，结束位置)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.erase(p);</code></td>
+<td>迭代器</td>
+<td>删除p所指向的位置格式：erase(删除位置)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.erase(p,q);</code></td>
+<td>迭代器</td>
+<td>删除区间[p,q)中的元素格式：erase([待删除的区间]/开始位置，结束位置)</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.clean()</code></td>
+<td>void</td>
+<td>清空容器</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>②可选要求:在允许的情况下，时间复杂度为固定时间。</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th>表达式</th>
+<th>返回类型</th>
+<th>含义</th>
+<th>容器</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code class="notranslate">a.front()</code></td>
+<td>T&amp;</td>
+<td>*a.begin() 返回首元素</td>
+<td>vector,list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.back()</code></td>
+<td>T&amp;</td>
+<td>*--a.end() 返回尾部元素</td>
+<td>vector,list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a,push_front(t)</code></td>
+<td>void</td>
+<td>a.insert(a.begin(),t) 在头部插入</td>
+<td>list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.push_back(t)</code></td>
+<td>void</td>
+<td>a.insert(a.end(),t) 在尾部插入</td>
+<td>vector,list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.pop_front(t)</code></td>
+<td>void</td>
+<td>a.erase(a.begin()) 删除头部</td>
+<td>list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a.pop_back(t)</code></td>
+<td>void</td>
+<td>a.erase(--a.end()) 删除尾部</td>
+<td>vector,list,deque</td>
+</tr>
+<tr>
+<td><code class="notranslate">a[n]</code>    <code class="notranslate">a.at(n)</code></td>
+<td>T&amp;</td>
+<td>*(a.begin()+n)  访问元素</td>
+<td>vector,deque</td>
+</tr>
+</tbody></table></markdown-accessiblity-table>
+<p>注意：<code class="notranslate">at()</code>方法会检查边界，若越界则引发<code class="notranslate">out_of_range</code>异常。</p>
+<p>(4)序列容器的详解</p>
+<p>·矢量类 <code class="notranslate">std::vector</code></p>
+<p>模板类<code class="notranslate">vector</code>即<code class="notranslate">std::vector</code>位于<code class="notranslate">vector</code>头文件中。</p>
+<p>可以动态修改长度、可以随机访问元素、在尾部添加删除元素的时间固定、在头部中间删除元素复杂度为线性时间、它是可反转容器，拥有rbegin()和rend()、使用reverse_iterator可以反向遍历容器。</p>
+<p>声明格式：<code class="notranslate">vector&lt;元素类型&gt; 对象名(元素个数);</code></p>
+<p>其类似于数组，可用<code class="notranslate">operator[]()</code>访问元素。(提供随机访问功能)</p>
+<p>·deque<strong>双向队列</strong>[Double-ended Queue]</p>
+<p>模板位于头文件<code class="notranslate">deque</code>类似于<code class="notranslate">vector</code>容器，支持随机访问，从deque对象的开始位置插入和删除元素的时间是固定的。</p>
+<p>·list<strong>双向链表</strong></p>
+<p>模板位于<code class="notranslate">list</code>头文件中。</p>
+<p>除了第一个和最后一个元素之外，每个元素都与前后的元素相链接，可以双向遍历。list链表中任一位置进行插入和删除的时间是固定的。list可以反转，但不支持数组表示法和随机访问。从容器插入或删除元素后，链表迭代器指向元素不变。</p>
+<p>| list成员函数[Alloc模板参数有默认值] |
+| --- | --- |
+| 函数 | 说明 |
+| <code class="notranslate">void merge(list&lt;T,Alloc&gt;&amp;x)merge(要合并的链表) </code>| 将链表x与调用链表合并。两个链表必须已近排序。合并后的经过排序的链表保存在调用链表中，x为空。时间复杂度为线性时间 |
+| <code class="notranslate">void remove(const T&amp; val)remove(待删除实例列表)</code> | 从链表中删除val的所有实例，复杂度为线性时间。 |
+| <code class="notranslate">void sort() </code>| 使用&lt;排序，n个元素时间复杂度为 |
+| <code class="notranslate">void splice(iterator pos ,list&lt;T,Alloc&gt; X)splice(插入位置，待插入链表) </code>| 将链表X的内容插入到pos的前面，X将清空。复杂度为固定时间。 |
+| <code class="notranslate">void unique()</code> | 将连续相同的元素压缩为单个元素，复杂度为线性时间。 |</p>
+<p><code class="notranslate">insert()</code>和<code class="notranslate">splice()</code>的区别：</p>
+<p> <code class="notranslate">insert()</code>将原始区间的副本插入到目标地址；<code class="notranslate">splice()</code>将原始区间移到目标地址，在其执行后迭代器仍然有效。</p>
+<p>非成员函数<code class="notranslate">sort()</code>需要随机访问迭代器。</p>
+<p>·[C++11]forward_list<strong>单链表</strong></p>
+<p>在单链表中，每个节点只链接到下一个节点，并没有链接到前一个节点。则它只要正向迭代器，它是不可反转容器，比list更简单。</p>
+<p>·queue<strong>队列</strong>[适配器类]</p>
+<p><code class="notranslate">queue</code>模板位于头<code class="notranslate">queue</code>，不允许随机访问队列元素，不允许遍历队列，可以将元素添加到队尾，从队首删除元素，查看首尾的值，检查元素数目和测试是否为空。</p>
+<p>| queue的操作 |
+| --- | --- |
+| 方法 | 说明 |
+| <code class="notranslate">bool empty() const</code> | 队列为空返回true否则为false |
+| <code class="notranslate">size_type size() const </code>| 返回元素数目 |
+|<code class="notranslate"> T&amp; front()</code> | 指向队首元素的引用 |
+| <code class="notranslate">T&amp; back() </code>| 指向队尾元素的引用 |
+|<code class="notranslate"> void push(const T&amp;x)</code> | 在队尾插入x |
+| <code class="notranslate">void pop()</code> | 删除队首元素 |</p>
+<p> ·priority_queue<strong>优先队列</strong>模板：</p>
+<p>位于头<code class="notranslate">queue</code>中，支持操作与<code class="notranslate">queue</code>相同。主要区别在于其最大的元素被移到队首，内部默认底层类为<code class="notranslate">vector</code>，</p>
+<p>可以修改确定元素的比较方法，构造函数如下：</p>
+<p><code class="notranslate">priority_queue&lt;int&gt; pq1;//默认大根堆</code></p>
+<p><code class="notranslate">priority_queue&lt;int&gt; pq2(greater&lt;int&gt;);//小根堆</code></p>
+<p><code class="notranslate">priority_queue&lt;int, vector&lt;int&gt;, less&lt;int&gt;&gt; que; //定义大根堆</code>
+<code class="notranslate">priority_queue&lt;int, vector&lt;int&gt;, greater&lt;int&gt;&gt; que; //定义小根堆，VS下需要加入头文件#include&lt;functional&gt;</code></p>
+<p>·stack<strong>栈</strong>：</p>
+<p>位于<code class="notranslate">stack</code>头文件中，其特点是先入后出。</p>
+<p>不允许随机访问遍历；允许压栈出栈，查看栈顶值，检查元素数目和栈是否为空。</p>
+<p>| stack操作 |
+| --- | --- |
+| 方法 | 说明 |
+| <code class="notranslate">bool empty() const</code> | 栈为空返回true否则为false |
+|<code class="notranslate"> size_type size() const</code> | 返回元素数目 |
+|<code class="notranslate"> T&amp; top()</code> | 返回指向栈顶的引用 |
+|<code class="notranslate"> void push(const T&amp;x)</code> | 在栈顶压入x |
+| <code class="notranslate">void pop()</code> | 删除栈顶元素(出栈) |</p>
+<p>·array [C++11]它是非STL容器，其长度固定，拥有成员operator[]和at()，可将STL算法用于它。</p>
+<p>4.<strong>关联容器</strong>：对容器概念上的另一改进。</p>
+<p>关联容器将<strong>值</strong>与<strong>键</strong>关联起来，并使用键来查找值。</p>
+<p>对于容器<code class="notranslate">X</code>，<code class="notranslate">X::value_type</code>指出了存储在容器中的值的类型，<code class="notranslate">X::key_type</code>指出了键的类型。提供了对元素的快速访问。</p>
+<p>允许插入新元素，但不能指定插入的位置。使用树实现，根节点链接1到2个节点，每个节点都如此，从而形成分支结构。</p>
+<p>STL提供4个关联容器：<code class="notranslate">set</code>、<code class="notranslate">multiset</code>(位于<code class="notranslate">set</code>头文件)、<code class="notranslate">map</code>、<code class="notranslate">multimap</code>(位于map头文件)；<code class="notranslate">set</code>的值与键类型相同，键是唯一的，<code class="notranslate">set</code>的值就是键。<code class="notranslate">multiset</code>与<code class="notranslate">set</code>相似，只是可能有多个值相同。</p>
+<p>在<code class="notranslate">map</code>中，值与键的类型不同，键是唯一的，每个键对应一个值，</p>
+<p><code class="notranslate">multimap</code>类似，只是一个键可以对应多个值。</p>
+<p>(1) set<strong>集合</strong></p>
+<p>①关联集合，可反转，可排序，且键是唯一的，不可以存储多个相同的值；</p>
+<p>②声明:<code class="notranslate">set&lt;键值类型&gt; 名称;</code></p>
+<p>第二个模板参数是可选的，可以用来指示对键进行排序的比较函数或对象。默认用<code class="notranslate">less&lt;键值类型&gt;</code>。</p>
+<p>③通用函数[要先排序]</p>
+<p><code class="notranslate">set_unior()</code>求并集(合并相同的值)，前两个参数指定第一个集合的区间，接下来两个指定第二个集合的区间，第五个指定了插入的地方，即输出迭代器.</p>
+<p>用法：<code class="notranslate">set_unior(第一个集合的开始，第一个集合的结束/[第一个集合的区间],第二个集合的开始，第二个集合的结束/[第二个集合的区间]，输出的位置);</code></p>
+<p><code class="notranslate">set_intersection()</code>求交集、<code class="notranslate">set_difference()</code>求两集合之差的用法与上面相同</p>
+<p>④set的方法</p>
+<p><code class="notranslate">lower_bound(键值)</code>将键作为参数并返回一个迭代器，指向集合中第一个不小于键参数的成员</p>
+<p><code class="notranslate">upper_bound(键值)</code>将键作为参数并返回一个迭代器，指向集合中第一个大于键参数的成员</p>
+<p>使用的都是二分法,复杂度\Theta(\log n)</p>
+<p>(2) multimap</p>
+<p>①创建：</p>
+<p><code class="notranslate">multimap&lt;键类型，数据类型&gt; 名称;</code>第三个模板参数可选，用于指出对键进行排序的比较函数或对象，默认为<code class="notranslate">less&lt;&gt;</code>；</p>
+<p>为了将信息结合在一起，实际的值与键将进行结合，<code class="notranslate">pair&lt;class T,class U&gt;</code>模板将这两种值存储到一个对象当中。</p>
+<p>如果<code class="notranslate">keytype</code>是键类型，<code class="notranslate">datatype</code>是数据类型，则值类型为<code class="notranslate">pair&lt;const keytype,datatype&gt;</code></p>
+<p>(注意<code class="notranslate">multimap</code>直接存值，即<code class="notranslate">pair</code>)数据项是按键排序的。</p>
+<p>②使用：模板<code class="notranslate">pair</code>的构造函数:</p>
+<p><code class="notranslate">pair&lt;键类型,数据类型&gt;(键,值);</code></p>
+<p>使用<code class="notranslate">insert(pair值)</code>方法插入容器。对于<code class="notranslate">pair</code>对象可以用<code class="notranslate">first</code>和<code class="notranslate">second</code>来访问键与值。</p>
+<p>③获取multimap信息</p>
+<p>成员函数<code class="notranslate">count(键)</code>接受键作为参数，返回具有该键的数目；</p>
+<p>成员函数<code class="notranslate">lower_bound()</code>和<code class="notranslate">upper_bound()</code>将键作为参数，原理与set的相同;</p>
+<p>成员函数<code class="notranslate">equal_range()</code>用键作为参数，返回两个迭代器</p>
+<p>他们表示的区间与该键匹配。该方法将两个值封装在一个pair对象中，这个pair的两个模板参数均为迭代器。</p>
+<p>5.<strong>无序关联容器</strong>：对容器概念的另一种改进。底层差别在于其基于数据结构哈希表，提供了效率。</p>
+<p>共4种：<code class="notranslate">unordered_set</code>、<code class="notranslate">unordered_multiset</code>、<code class="notranslate">unordered_map</code>、<code class="notranslate">unordered_multimap</code>.</p>
+<p>C++11 库提供了模板 <code class="notranslate">hash&lt;key&gt;</code>，无序关联容器默认使用该模板。</p>
+<p>见仓库中的<code class="notranslate">附录.pdf</code></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://hairsboy-tech.github.io">Hairsboy's blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","HAIRSBOY-tech/hairsboy-tech.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
